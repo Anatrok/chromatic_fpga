@@ -1,12 +1,12 @@
 PLATFORM := $(shell uname -s)
-ifneq ($(findstring MINGW,$(PLATFORM)),)
-PLATFORM := windows32
-USE_WINDRES := true
-endif
+#ifneq ($(findstring MINGW,$(PLATFORM)),)
+#PLATFORM := windows32
+#USE_WINDRES := true
+#endif
 
-ifneq ($(findstring MSYS,$(PLATFORM)),)
-PLATFORM := windows32
-endif
+#ifneq ($(findstring MSYS,$(PLATFORM)),)
+#PLATFORM := windows32
+#endif
 
 SRC := ./src
 OBJ := ./obj
@@ -37,7 +37,7 @@ bootroms: $(BIN)/cgb_boot.bin vmem
 # Binary compiler
 $(BIN)/%.bin: $(SRC)/%.asm $(OBJ)/CGB_logo.rle
 	-@$(MKDIR) -p $(dir $@)
-	rgbasm -l -i $(OBJ) -i $(SRC) -o $@.tmp $<
+	rgbasm -i $(OBJ) -i $(SRC) -o $@.tmp $<
 	rgblink -o $@.tmp2 $@.tmp
 	dd if=$@.tmp2 of=$@ count=1 bs=$(if $(findstring mgb,$@)$(findstring dmg,$@)$(findstring sgb,$@),256,2304) 2> $(NULL)
 	@rm $@.tmp $@.tmp2
