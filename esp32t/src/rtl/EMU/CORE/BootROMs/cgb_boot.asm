@@ -444,7 +444,7 @@ ENDM
 MACRO raw_palette_comb ; Obj0, Obj1, Bg
     db (\1) * 2, (\2) * 2, (\3) * 2
 ENDM
-    palette_comb 31, 31, 31 ;  0, Right + A + B
+    palette_comb  4,  4, 29 ;  0, Right + A
     palette_comb 18, 18, 18 ;  1, Right
     palette_comb 20, 20, 20 ;  2
     palette_comb 24, 24, 24 ;  3, Down + A
@@ -495,8 +495,8 @@ ENDM
     palette_comb  4,  3, 28 ; 48, Left
     palette_comb 28,  3,  6 ; 49, Down + B
     palette_comb  4, 28, 29 ; 50
-    palette_comb  4,  4, 29 ; 51, Right + A
-    palette_comb 30, 30, 30 ; 52, Left + A + B
+    palette_comb 30, 30, 30 ; 51, Right + A + B 
+    palette_comb 31, 31, 31 ; 52, Left + A + B
 
 Palettes:
     dw $7FFF, $32BF, $00D0, $0000 ;  0
@@ -529,9 +529,8 @@ Palettes:
     dw $0000, $4200, $037F, $7FFF ; 27
     dw $7FFF, $7E8C, $7C00, $0000 ; 28
     dw $7FFF, $1BEF, $6180, $0000 ; 29
-    dw $0E10, $2DCA, $3166, $24E3 ; 30, Chromatic DMG
-    ; dw $6BFC, $3B11, $2DA7, $1061 ; 31, Chromatic BGB
-    dw $0252, $15E9, $2185, $0CE1 ; 31, DMG Bright
+    dw $0E10, $2DCA, $3166, $24E3 ; 30, dmg
+    dw $6BFC, $3B11, $2DA7, $1061 ; 31, bgb
 
 
 KeyCombinationPalettes:
@@ -539,7 +538,7 @@ KeyCombinationPalettes:
     db 48 * 3  ; Left
     db 5  * 3  ; Up
     db 8  * 3  ; Down
-    db 51 * 3  ; Right + A
+    db 0  * 3  ; Right + A
     db 40 * 3  ; Left + A
     db 43 * 3  ; Up + A
     db 3  * 3  ; Down + A
@@ -547,7 +546,7 @@ KeyCombinationPalettes:
     db 7  * 3  ; Left + B
     db 28 * 3  ; Up + B
     db 49 * 3  ; Down + B
-    db 0  * 3  ; Right + A + B
+    db 51 * 3  ; Right + A + B
     db 52 * 3  ; Left + A + B
 
 TrademarkSymbol:
