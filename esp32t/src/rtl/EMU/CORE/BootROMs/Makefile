@@ -4,12 +4,12 @@ $(info    PLATFORM is $(PLATFORM))
 ifneq ($(findstring MINGW,$(PLATFORM)),)
 $(info    found string MINGW so PLATFORM is $(PLATFORM))
 PLATFORM := windows32
-USE_WINDRES := true
 endif
 
 ifneq ($(findstring MSYS,$(PLATFORM)),)
 PLATFORM := windows32
 $(info    found string MSYS so PLATFORM is $(PLATFORM))
+NULL := /dev/null
 endif
 
 SRC := ./src
@@ -22,7 +22,7 @@ EXESUFFIX:=.exe
 NATIVE_CC = clang -IWindows -Wno-deprecated-declarations
 # To force use of the Unix version instead of the Windows version
 MKDIR := $(shell which mkdir)
-NULL := NUL
+#NULL := NUL
 else
 EXESUFFIX:=
 NATIVE_CC := cc

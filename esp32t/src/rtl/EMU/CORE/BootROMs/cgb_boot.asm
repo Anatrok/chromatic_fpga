@@ -335,7 +335,7 @@ ChecksumsEnd:
 
 PalettePerChecksum:
 MACRO palette_index ; palette, flags
-    db (0) | (\2) ; | $80 means game requires DMG boot tilemap
+    db (\1) | (\2) ; | $80 means game requires DMG boot tilemap
 ENDM
     palette_index 0, 0  ; Default Palette
     palette_index 4, 0  ; ALLEY WAY
@@ -532,7 +532,7 @@ Palettes:
     dw $0E10, $2DCA, $3166, $24E3 ; 30, dmg
     dw $6BFC, $3B11, $2DA7, $1061 ; 31, bgb
 
-
+    
 KeyCombinationPalettes:
     db 1  * 3  ; Right
     db 48 * 3  ; Left
@@ -1011,11 +1011,11 @@ LoadBGPalettes:
 LoadPalettes:
     ld a, $80
     or e
-    ldh [c], a
+    ld [c], a
     inc c
 .loop
     ld a, [hli]
-    ldh [c], a
+    ld [c], a
     dec d
     jr nz, .loop
     ret
