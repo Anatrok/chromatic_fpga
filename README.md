@@ -60,6 +60,16 @@ openFPGALoader --write-flash --cable gwu2x --reset <file>
 
 Here, `<file>` refers to the generated bitstream file. This file can be found at esp32t/impl/pnr/evt1_x2.fs.
 
+**BootRom**
+
+If you want to edit and built bootbin, modify cgb_boot.asm in /esp32t/src/rtl/EMU/CORE/BootROMs and then run makefile
+
+```bash
+esp32t/src/rtl/EMU/CORE/BootROMs/make bootroms
+```
+
+Here, `<file>` refers to the generated bitstream file. This file can be found at esp32t/impl/pnr/evt1_x2.fs.
+
 ## Issues
 Please submit all issues and bug reports through our [Contact Form](https://modretro.com/pages/contact).
 

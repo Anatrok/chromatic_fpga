@@ -1,21 +1,25 @@
 PLATFORM := $(shell uname -s)
-#ifneq ($(findstring MINGW,$(PLATFORM)),)
-#PLATFORM := windows32
-#USE_WINDRES := true
-#endif
+$(info    PLATFORM is $(PLATFORM))
 
-#ifneq ($(findstring MSYS,$(PLATFORM)),)
-#PLATFORM := windows32
-#endif
+ifneq ($(findstring MINGW,$(PLATFORM)),)
+$(info    found string MINGW so PLATFORM is $(PLATFORM))
+PLATFORM := windows32
+USE_WINDRES := true
+endif
+
+ifneq ($(findstring MSYS,$(PLATFORM)),)
+PLATFORM := windows32
+$(info    found string MSYS so PLATFORM is $(PLATFORM))
+endif
 
 SRC := ./src
 OBJ := ./obj
 BIN := ./bin
 
 ifeq ($(PLATFORM),windows32)
-_ := $(shell chcp 65001)
+_ := $(shell chcp.com 65001)
 EXESUFFIX:=.exe
-NATIVE_CC = clang -IWindows -Wno-deprecated-declarations --target=i386-pc-windows
+NATIVE_CC = clang -IWindows -Wno-deprecated-declarations
 # To force use of the Unix version instead of the Windows version
 MKDIR := $(shell which mkdir)
 NULL := NUL
@@ -56,13 +60,9 @@ $(OBJ)/%$(EXESUFFIX): $(SRC)/%.c
 	-@$(MKDIR) -p $(dir $@)
 	$(NATIVE_CC) -std=c99 -Wall -Werror $< -o $@
 
-.PHONY : clean
-clean:
-	rm -rf $(SRC)
-	rm -rf $(OBJ)
-	rm -rf $(BIN)
-	rm -f *.mif
-	rm -f CGB_logo.png
+.PHONY : vmem
+vmem:
+	hexdump -v -e '1/1 "%02X \r\n"' $(BIN)/cgb_boot.bin > cgb_boot.mif.vmem
 
 .PHONY : prepare
 prepare:
@@ -70,12 +70,10 @@ prepare:
 	cp -f ../../../../Gameboy_MiSTer/BootROMs/CGB_logo.png CGB_logo.png
 	cp -f cgb_boot.asm $(SRC)/cgb_boot.asm
 
-.PHONY : mif
-mif:
-	srec_cat \
-	$(BIN)/cgb_boot.bin -Binary \
-	-Output_Block_Size 16 -o cgb_boot.mif -mif -CRLF
-
-.PHONY : vmem
-vmem:
-	hexdump -v -e '1/1 "%02X \r\n"' $(BIN)/cgb_boot.bin > cgb_boot.mif.vmem
+.PHONY : clean
+clean:
+	rm -rf $(SRC)
+	rm -rf $(OBJ)
+	rm -rf $(BIN)
+	rm -f *.mif
+	rm -f CGB_logo.png
