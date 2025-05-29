@@ -543,6 +543,7 @@ Palettes:
     dw $43E0, $3B40, $2A60, $1DC0 ; 30, GBL from https://redd.it/1j2l9h1
     dw $01EF, $018B, $0147, $00E2 ; 31, DMG from https://redd.it/1j2l9h1
 
+    
 KeyCombinationPalettes:
 MACRO palette_comb_id ; PaletteCombinations ID
     db (\1) * 3
