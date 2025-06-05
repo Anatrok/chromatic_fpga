@@ -2,3 +2,7 @@ esp32t/impl/gwsynthesis/*
 esp32t/impl/pnr/*
 esp32t/impl/temp/*
 esp32t/build/*
+esp32t/src/rtl/EMU/CORE/BootROMs/cgb_boot_fast.bin
+esp32t/src/rtl/EMU/CORE/BootROMs/cgb_boot.bin
+esp32t/src/rtl/EMU/CORE/BootROMs/CGB_logo.pb12
+esp32t/src/rtl/EMU/CORE/BootROMs/pb12.exe

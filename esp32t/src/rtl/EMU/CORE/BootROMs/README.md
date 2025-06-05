@@ -4,6 +4,4 @@
 
 2. Ensure that RGBDS is on your path.
 
-3. Run `make && make bootroms && make clean`
-
-Note: The BootROM is restricted to 2048 bytes to limit impact on BlockRAM.
+3. Run `make` in MINGW64 or something

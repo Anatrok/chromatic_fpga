@@ -11,7 +11,7 @@ endif
 ifeq ($(PLATFORM),windows32)
 _ := $(shell chcp 65001)
 EXESUFFIX:=.exe
-NATIVE_CC = clang -IWindows -Wno-deprecated-declarations --target=x86_64-pc-windows
+NATIVE_CC = clang -IWindows -Wno-deprecated-declarations
 # To force use of the Unix version instead of the Windows version
 MKDIR := $(shell which mkdir)
 NULL := NUL
